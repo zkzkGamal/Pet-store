@@ -1,0 +1,117 @@
+{% extends 'main.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static '/css/vetDash.css' %}">
+
+    <title>{{user.username}} Dashboard</title>
+    <style>
+        h1{
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="dash">
+        <div class="sidebar">
+            <div class="doctor-img">
+                <img src="{{user1.profile_pic.url}}" alt="{{user.username}}">
+            </div>
+            <div class="doctor-info">
+                <p><b>Name : {{user.username}}</b></p>
+                <p><b>Email</b> : {{user1.email}}</p>
+                <p><b>phone</b> : {{user1.phone}}</p>
+                <p><b>Address</b> : <a href="{{user1.address}}" target="_blank"> show in maps </a></p>
+                <p><b>about</b> : {{user1.about}}</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="main">
+                <div class="calendar">
+                    <h1>Calendar</h1>
+                    <form action="" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>Day</th>
+                            <th>Date</th>
+                            <th>start session</th>
+                            <th>end session</th>
+                            <th>action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td name="Monday">day1</td>
+                                    <td><input type="date" name="date1" id=""></td>
+                                    <td><input type="time" name="startsession1" id=""></td>
+                                    <td><input type="time" name="endsessin1" id=""></td>
+                                    <td><input type="number" name="duration1" id=""></td>
+                                </tr>
+                                <tr>
+                                    <td name="Tuesday">day2</td>
+                                    <td><input type="date" name="date2" id=""></td>
+                                    <td><input type="time" name="startsession2" id=""></td>
+                                    <td><input type="time" name="endsessin2" id=""></td>
+                                </tr>
+                                <tr>
+                                    <td name="Wednesday">day3</td>
+                                    <td><input type="date" name="date3" id=""></td>
+                                    <td><input type="time" name="startsession3" id=""></td>
+                                    <td><input type="time" name="endsessin3" id=""></td>
+                                </tr>
+                                <tr>
+                                    <td name="Thursday">day4</td>
+                                    <td><input type="date" name="date4" id=""></td>
+                                    <td><input type="time" name="startsession4" id=""></td>
+                                    <td><input type="time" name="endsessin4" id=""></td>
+                                </tr>
+                                <tr>
+                                    <td name="Friday">day5</td>
+                                    <td><input type="date" name="date5" id=""></td>
+                                    <td><input type="time" name="startsession5" id=""></td>
+                                    <td><input type="time" name="endsessin5" id=""></td>
+                                </tr>        
+                        </tbody>
+                    </table>
+                        <input type="submit" value="set" id="btn"></td>
+                    </form>
+                </div>
+            <div class="appointments">
+                <h1>Appointments</h1>
+                {% if session %}
+                <table>
+                    <thead>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                    </thead>
+                    <tbody>
+                    {% for s in session %}
+                        <tr>
+                            <td>{{s.patient.user.username}}</td>
+                            <td>{{s.sessionData}}</td>
+                            <td>{{s.patient.user.email}}</td>
+                            <td>{{s.patient.phone}}</td>
+                        </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+                {%endif%}
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static '/js/nav-foot.js' %}"></script>
+    
+</body>
+</html>
+{% endblock %}

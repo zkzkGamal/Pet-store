@@ -1,0 +1,165 @@
+{% load static%}
+
+<nav class="navbar">
+    <div class="logo">
+        <div class="side-container">
+            <div class="side-head" id="side-he">
+                    <span class="sh">
+                        <span class="s-h "></span>
+                        <span class="s-h "></span>
+                        <span class="s-h "></span>
+                    </span>
+            </div>
+            <span id="menu-span">menu</span>
+        </div> 
+        <div class="logoImgContainer">
+            <a href="{%url 'home' %}"><img src="{% static 'img/Picture1.png'%}" alt="" class="logo-img"></a>
+        </div>
+            <div class="nav-item">
+                <form method="GET" class="search">
+                    {{aa.form}}
+                    <!-- <input type="text" name="product_name" value="ds" id="id_product_name" class="search-box"> -->
+                    <!-- {{form.product_name}} -->
+                    <input type="submit" value="search" class="search-btn">
+                </form>
+            
+                <div class="a">
+                <img src="{% static 'img/user.png'%}" id="user-img" alt="">
+                {% if user.is_authenticated %}
+                <div class="login-logout-pop hide">
+                    <p class="account-info">Log in as, {{user.username}}</p>
+                    {% if customer %}
+                    <a href="{%url 'seller'%}"><button  class="btn" id="user-btn">Became a seller</button></a>
+                    {%elif doctor%}
+                    <a href="{%url 'vetDash'%}"><button  class="btn" id="user-btn">{{user.username}} DashBoard</button></a>
+                    {%else%}
+                    <a href="{%url 'DashBoard'%}"><button  class="btn" id="user-btn">{{user.username}} DashBoard</button></a>
+                    {%endif%}
+                    <a href="{%url 'logout'%}"><button  class="btn" id="user-btn">Log out</button></a>
+                </div> 
+                {%else%}
+                <div class="login-logout-pop hide">
+                    <p class="account-info">Log in to place order</p>
+                    <a href="{%url 'login'%}"><button class="btn" id="user-btn"> Login </button></a>
+                    <a href="{%url 'doctor-sign'%}"><button class="btn" id="user-btn">Vent signup </button></a>
+                </div>
+                {% endif %}
+            </div>
+
+               
+
+                <a href="{% url 'card' %}" class="a"><img src="{% static 'img/cart.png' %}" alt=""></a>
+            </div>
+        </div>
+</nav>
+<div class="menu-custom">
+        <div class="sign-redirect">
+            {% if user.is_authenticated %}
+                {% if customer %}
+                <a href="{% url 'seller' %}">
+                    <img src="img/user.png" alt=""> <span class="link-side-special">
+                        {{user.username}} DashBoard
+                    </span>
+                </a>
+                {%elif doctor%}
+                <a href="{% url 'vetDash' %}">
+                    <img src="img/user.png" alt=""> <span class="link-side-special">
+                        {{user.username}} DashBoard
+                    </span>   
+                </a>
+                {%else%}
+                <a href="{% url 'DashBoard' %}">
+                    <img src="img/user.png" alt=""> <span class="link-side-special">
+                        {{user.username}} DashBoard
+                    </span>
+                </a>
+                {%endif%}
+            {%else%}
+            <a href="{%url  'login'%}" class="profile-link"><img src="img/user.png" alt=""> <span class="link-side-special">
+                Hello , sign in
+            </span> </a>
+            {%endif%}
+        </div>
+        <div class="menu-container">
+            <ul class="links-container">
+                <li class="links-item head-link"><h3> main & Cards </h3> </li>
+                <li class="links-item"><a href="{% url 'home' %}" class="link">Home</a></li>
+                <li class="links-item"><a href="{% url 'card' %}" class="link"><img src="img/cart.png" alt="">Card</a></li>
+                <!-- <li class="endline"></li> -->
+                <li class="links-item"><a href="{%url 'products'  %}" class="link">Products</a></li>
+            </ul>
+            <div class="endline"></div>
+            <ul class="links-container">
+                <li class="links-item head-link"><h3> Petss </h3> </li>
+                <li class="links-item"><a href="{%url 'product-sp' 'Dog' %}" class="link">Dog</a></li>
+                <li class="links-item"><a href="{%url 'product-sp' 'Cat' %}" class="link">Cat</a></li>
+                <li class="links-item"><a href="{%url 'product-sp' 'Bird' %}" class="link">Bird</a></li>
+                <li class="links-item"><a href="{%url 'product-sp' 'Fish' %}" class="link">Fish</a></li>    
+            </ul>
+            <div class="endline"></div>
+            <ul class="links-container">
+                <li class="links-item head-link"><h3> Accessories & categories </h3> </li>
+                <li class="links-item"><a href="{%url 'product-ct' 'Food' %}" class="link">Food</a></li>
+                <li class="links-item"><a href="{%url 'product-ct' 'Clothes' %}" class="link">Clothes</a></li>
+                <li class="links-item"><a href="{%url 'product-ct' 'accessories' %}" class="link">accessories</a></li>
+                <li class="links-item"><a href="{%url 'product-ct' 'Medicine' %}" class="link">Medicine</a></li>
+                <li class="links-item"><a href="{%url 'product-ct' 'Toys' %}" class="link">Toys</a></li>
+                <li class="links-item"><a href="{%url 'product-ct' 'Cages' %}" class="link">Cages</a></li>
+            </ul>
+            <div class="endline"></div>
+            <ul class="links-container">
+                <li class="links-item head-link"><h3> Book Vent </h3> </li>
+                <li class="links-item"><a href="{%url 'doctorcards'  %}" class="link">Doctors</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="all-heddin"></div>
+
+{% block content %}
+
+
+{% endblock content %}
+<footer class="foot">
+    <div class="footer-content">
+        <img src="{% static 'img/Picture1.png' %}" alt="" class="foot-logo">
+        <div class="footer-ul-category">
+            <ul class="category">
+                <li class="category-title">Cat</li>
+                <li><a href="#" class="footerlink">Cats</a></li>
+                <li><a href="#" class="footerlink">Food</a></li>
+                <li><a href="#" class="footerlink">Cages</a></li>
+                <li><a href="#" class="footerlink">vitmens</a></li>
+                <li><a href="#" class="footerlink">clothes</a></li>
+                <li><a href="#" class="footerlink">accessories</a></li>
+            </ul>
+            <ul class="category">
+                <li class="category-title">Dog</li>
+                <li><a href="#" class="footerlink">Dogs</a></li>
+                <li><a href="#" class="footerlink">Food</a></li>
+                <li><a href="#" class="footerlink">Cages</a></li>
+                <li><a href="#" class="footerlink">vitmens</a></li>
+                <li><a href="#" class="footerlink">clothes</a></li>
+                <li><a href="#" class="footerlink">accessories</a></li>
+            </ul>
+        </div>
+    </div>
+    <p class="footer-title">about our team</p>
+    <p class="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem quibusdam o
+        fficia neque aliquid laudantium voluptate dolores, nostrum commodi soluta quae minima 
+        itaque inventore fuga, impedit incidunt, quis eum nihil enim.</p>
+    <p class="info">support Email:hazem12@gmail.com</p>
+    <p class="info">tel :12589545521</p>
+    <div class="footer-social-conatiner">
+        <div>
+            <a href="#" class="social-link">term & services</a>
+            <a href="#" class="social-link">privacy page</a>
+        </div>
+        <div>
+            <a href="#" class="social-link">facebook</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">instgram</a>
+        </div>
+    </div>
+    <p class="footer-credit">best online pet shop in egypt </p>
+</footer>
+

@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Cards</title>
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static '/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static '/css/doctorcards.css' %}">
+  </head>
+  <body>
+    <div class="container">
+       {% for doctor in docdata %} 
+      <div class="card">
+        <div class="parent-info">
+          
+          <img src="{{ doctor.profile_pic.url }}" alt="Profile Picture">
+          <h2 class="card-title">{{ doctor.name }}</h2>
+          <p class="card-content">about: {{ doctor.about }}</p>
+          <a href="{% url 'doctor_details' doctor.slug  %}" class="card-button">Book Appointment</a>
+        </div>
+      </div>
+ {% endfor %}      
+ 
+      <!-- Add more doctor cards as needed -->
+    </div>
+    <script src="{% static '/js/nav-foot.js' %}"></script>
+    <script src="{% static '/js/home.js' %}"></script>
+    <script src="{% static '/js/product-card.js'%}"></script>
+  </body>
+  {% endblock content %}
+</html>

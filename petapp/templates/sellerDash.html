@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% load static%}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/nav.css' %}">
+    <link rel="stylesheet" href="{% static '/css/footer.css' %}">  
+    <link rel="stylesheet" href="{% static '/css/Dashboard.css' %}">  
+    <!-- <link rel="stylesheet" href="{% static '/css/home.css' %}">   -->
+
+    <title>{{user.username}} DashBoard</title>
+</head>
+<body>
+    <img src="{% static 'img/loader.gif' %}" alt="" class="loader loader-list">
+    <div class="product-listing hide">
+        <div class="add-product">
+            <p class="add-product-title">add product
+            </p>
+            <a href="{% url 'add-pet' %}" class="btn">add pet</a>
+            <a href="{% url 'add-product' %}" class="btn">add product</a>
+        </div>
+        {%if product%}
+        <!-- cards -->
+        <div class="product-container">
+            {%for pro in product%}
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="tag">product</span>
+                    <img src="{{pro.product_img.url}}" alt="" class="product-img">
+                    <button class="card-action-btn edit">
+                       <a href="{%url 'edit-product' pro.slug%}"><img src="{%static 'img/edit.png'%}" alt=""></a>
+                    </button>
+                    <button class="card-action-btn delete">
+                        <a href="{% url 'delete-product' pro.slug %}"><img src="{%static 'img/error.png'%}" alt=""></a>
+                    </button>
+                </div>
+                <div class="product-info">
+                    <h2 class="prodcut-name">name: {{pro.product_name}}</h6>
+                    <p class="product-sord-des"> {{pro.product_shot_des}}</a>
+                    <span style="color: red;">{{pro.product_sell_price}}EGP</span><span style="padding:0 3px;color: rgb(194, 198, 201); text-decoration:line-through ">{{pro.product_price}}EGP</span>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+        {%else%}
+        <img src="{% static 'img/no-products.png' %}" class="no-product-image" alt="">
+        {%endif%}
+        
+    </div>
+    <script>
+        let loader = document.querySelector('.loader')
+        let productListing = document.querySelector('.product-listing')
+        window.onload = () => {
+            loader.style.display = 'block';
+            setTimeout(()=>{
+                productListing.classList.remove('hide')
+                loader.style.display = 'none'
+            },800)
+        }
+    </script>
+    <script src="{% static '/js/nav-foot.js' %}"></script>
+
+</body>
+</html>
+{% endblock %}
